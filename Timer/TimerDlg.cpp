@@ -34,9 +34,10 @@ void CTimerDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CTimerDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	ON_BN_CLICKED(IDC_BUTTON1, &CTimerDlg::OnBnClickedButton1)
 	ON_WM_TIMER()
+	ON_BN_CLICKED(IDC_BUTTON1, &CTimerDlg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_BUTTON2, &CTimerDlg::OnBnClickedButton2)
+	ON_BN_CLICKED(IDC_BUTTON3, &CTimerDlg::OnBnClickedButton3)
 END_MESSAGE_MAP()
 
 
@@ -141,7 +142,7 @@ void CTimerDlg::OnTimer(UINT_PTR nIDEvent)
 			CurrentTime.SetTextColor(CurrentColor);
 
 			CurrentTimeString.Format(CString(L"Время остановлено. Дни: %d Часы: %d Минуты: %d Секунды: %d"), Time_Difference.GetDays(), Time_Difference.GetHours(), Time_Difference.GetMinutes(), Time_Difference.GetSeconds());
-			CurrentTime.SetWindowTextW(CurrentTimeString, Little);
+			CurrentTime.SetWindowTextW(CurrentTimeString, Medium);
 		}
 		else
 		{
@@ -155,7 +156,7 @@ void CTimerDlg::OnTimer(UINT_PTR nIDEvent)
 
 			CurrentTimeString.Format(CString(L"Дни: %d Часы: %d Минуты: %d Секунды: %d"), Time_Difference.GetDays(), Time_Difference.GetHours(), Time_Difference.GetMinutes(), Time_Difference.GetSeconds());
 
-			CurrentTime.SetWindowTextW(CurrentTimeString, Medium);
+			CurrentTime.SetWindowTextW(CurrentTimeString, Big);
 		}
 
 		SingleLock.Unlock();
@@ -173,6 +174,27 @@ void CTimerDlg::OnBnClickedButton2()
 
 	Stop = true;
 	CurrentColor = RedColor;
+
+	SingleLock.Unlock();
+}
+
+
+void CTimerDlg::OnBnClickedButton3()
+{
+	// TODO: добавьте свой код обработчика уведомлений
+	CSingleLock SingleLock(&StopCriticalSection);
+	SingleLock.Lock();
+
+	Stop = !Stop;
+
+	if (Stop)
+	{
+		CurrentColor = RedColor;
+	}
+	else
+	{
+		CurrentColor = GrayColor;
+	}
 
 	SingleLock.Unlock();
 }

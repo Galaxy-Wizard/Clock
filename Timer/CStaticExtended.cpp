@@ -29,29 +29,33 @@ void CStaticExtended::OnPaint()
 
 		if (Size == Big)
 		{
-			Result_1 = CurrentFont.CreateFontW(22, 16, 16, 20, FW_NORMAL, TRUE, TRUE, FALSE, RUSSIAN_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, VARIABLE_PITCH, nullptr);
+			Result_1 = CurrentFont.CreateFontW(24, 16, 16, 16, FW_NORMAL, TRUE, TRUE, FALSE, RUSSIAN_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, VARIABLE_PITCH, nullptr);
 		}
 		else
 		{
 			if (Size == Medium)
 			{
-				Result_1 = CurrentFont.CreateFontW(12, 8, 16, 20, FW_NORMAL, TRUE, TRUE, FALSE, RUSSIAN_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, VARIABLE_PITCH, nullptr);
+				Result_1 = CurrentFont.CreateFontW(22, 12, 16, 16, FW_NORMAL, TRUE, TRUE, FALSE, RUSSIAN_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, VARIABLE_PITCH, nullptr);
 			}
 			else
 			{
 
 				if (Size == Little)
 				{
-					Result_1 = CurrentFont.CreateFontW(8, 6, 16, 20, FW_NORMAL, TRUE, TRUE, FALSE, RUSSIAN_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, VARIABLE_PITCH, nullptr);
+					Result_1 = CurrentFont.CreateFontW(16, 12, 16, 16, FW_NORMAL, TRUE, TRUE, FALSE, RUSSIAN_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, ANTIALIASED_QUALITY, VARIABLE_PITCH, nullptr);
 				}
 			}
 		}
 
 		if (Result_1 == TRUE)
 		{
+			CRect Rectangle;
+
+			GetClientRect(Rectangle);
+
 			HGDIOBJ LastFont = pdc->SelectObject(CurrentFont);
 
-			BOOL Result_2 = pdc->TextOutW(22, 16, WindowText);
+			BOOL Result_2 = pdc->TextOutW(22, Rectangle.Height() / 2, WindowText);
 
 			pdc->SelectObject(LastFont);
 

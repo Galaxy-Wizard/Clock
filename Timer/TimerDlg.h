@@ -27,20 +27,23 @@ public:
 protected:
 	HICON m_hIcon;
 
+	bool Stop;
+
+	CTimeSpan InitialEventTime;
+	CTimeSpan CurrentEventTime;
+	CStaticExtended CurrentTime;
+	COLORREF CurrentColor;
+	CCriticalSection StopCriticalSection;
+
 	// Созданные функции схемы сообщений
 	virtual BOOL OnInitDialog();
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
-	afx_msg void OnBnClickedButton1();
 	afx_msg void OnTimer(UINT_PTR nIDEvent);
 
-	CTimeSpan InitialEventTime;
-	CTimeSpan CurrentEventTime;
-	CStaticExtended CurrentTime;
-	bool Stop;
-	COLORREF CurrentColor;
-	CCriticalSection StopCriticalSection;
+	afx_msg void OnBnClickedButton1();
 	afx_msg void OnBnClickedButton2();
+	afx_msg void OnBnClickedButton3();
 };
